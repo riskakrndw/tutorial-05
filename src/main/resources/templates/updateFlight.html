@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Add Flight</title>
+	</head>
+	<body>
+		
+		<h3>Update Penerbangan</h3>
+		<form th:action="@{/flight/update}" th:object="${flight}" method="POST">
+			<input type="hidden" th:field="*{pilot}"/>
+			<input type="hidden" th:field="${flight.id}"/>
+			Flight Number : <br>
+			<input type="text" name="flight_number" th:field="*{flightNumber}"/> <br>
+			Origin : <br>
+			<input type="text" name="origin" th:field="*{origin}"/> <br>
+			Destination : <br>
+			<input type="text" name="destination" th:field="*{destination}"/> <br>
+			Time : <br>
+			<input type="date" name="time" th:field="*{time}"/> <br><br>
+			<button type="submit">Submit</button>
+		</form>
+	</body>
+
+</html>

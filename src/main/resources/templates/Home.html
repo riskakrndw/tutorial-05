@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Home</title>
+		<object th:include="fragments/fragment::css" th:remove="tag"></object>
+		<object th:include="fragments/fragment::js" th:remove="tag"></object>
+	</head>
+	<body>
+		<nav th:replace="fragments/fragment :: navbar">	
+			
+		</nav>
+		<div class="container">
+		<br>
+			<div class="row justify-content-md-center">
+			<div class="col-md-6">
+			<section class="card sm-4 shadow-sm bg-light text-center">
+			<br>
+			<h4>Welcome</h4>
+			<br>
+			<div class="row justify-content-md-center">
+				<div class="col-mid-6" style="margin-right:20px;">
+					<div class="card">
+						<div class="card-header">Pilot</div>
+						<div class="card-body">
+							<a class="btn btn-outline-info" th:href="@{/pilot/add}">Tambah</a>
+							<a class="btn btn-outline-success" th:href="@{/pilot/viewAll}">Daftar Pilot</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-mid-6">
+					<div class="card">
+						<div class="card-header">Flight</div>
+						<div class="card-body">
+							<a class="btn btn-outline-success" th:href="@{/flight/view}">Daftar Semua Flight</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<br>
+		<div class="row justify-content-md-center">
+			<div class="col-mid-6" style="margin-bottom:20px;">
+					<div class="card">
+						<div class="card-header">Cari Pilot</div>
+						<form th:action="@{/pilot/view}" method="GET">
+							<div class="card-body">
+								<label for="licenseNumber">License Number :</label>
+								<input type="text" name="licenseNumber" class="form-control"/>
+								<p></p>
+								<button type="submit" class="btn btn-outline-info">Cari</button>
+							</div>
+						</form>
+					</div>
+			</div>
+		</div>
+		</section>
+		</div>
+		</div>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Pilot Detail</title>
+	</head>
+	<body>
+		<h2>Pilot Data</h2>
+		<h3 th:text="'License Number : ' + ${pilot.licenseNumber}"></h3>
+		<h3 th:text="'Name : ' + ${pilot.name}"></h3>
+		<h3 th:text="'Fly Hour : ' + ${pilot.flyHour}"></h3>
+		<h3 th:if="${pilot.flyHour} >= 100">Status: Pilot Senior</h3>
+		<h3 th:unless="${pilot.flyHour} >= 100">Status: Pilot Junior</h3>
+		<br>
+		<td><a th:href="@{'/flight/add/' + ${pilot.licenseNumber}}">Add Flight</a></td>
+		<h4>Flight Data</h4>
+		<table border="1" style="width:relative;">
+			<tr>
+				<th>Flight Number</th>
+				<th>Origin</th>
+				<th>Destination</th>
+				<th>Time</th>
+				<th>Action</th>
+			</tr>
+			<tr th:each="flight, iterationStatus : ${flight}" th:style="${iterationStatus.even} ? 'display:none;'">
+				<td th:text="${iterationStatus.count}"></td>
+				<td th:text="${flight.flightNumber}"></td>
+				<td th:text="${flight.origin}"></td>
+				<td th:text="${flight.destination}"></td>
+				<td><a th:href="@{'/flight/view/' + ${flight.flightNumber}}">See Flight Detail</a></td>
+			</tr>
+		</table>
+	</body>
+
+</html>
