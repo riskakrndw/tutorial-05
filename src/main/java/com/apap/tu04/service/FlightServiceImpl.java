@@ -31,14 +31,29 @@ public class FlightServiceImpl implements FlightService{
 	}
 
 	@Override
-	public void deleteFlight(PilotModel pilot, String flightNumber) {
-		flightDb.deleteByPilotAndFlightNumber(pilot, flightNumber);
+	public void deleteFlight(String flightNumber) {
+		flightDb.delete(this.getFlightDetailByFlightNumber(flightNumber));
+	}
+
+	@Override
+	public void deleteFlightById(long id) {
+		flightDb.delete(this.getFlightById(id));
+	}
+
+	@Override
+	public FlightModel getFlightById(long id) {
+		return flightDb.findById(id);
 	}
 
 	@Override
 	public FlightModel getFlight(PilotModel pilot, String flightNumber) {
 		// TODO Auto-generated method stub
 		return flightDb.findByPilotAndFlightNumber(pilot, flightNumber);
+	}
+
+	@Override
+	public FlightModel getFlightDetailByFlightNumber(String flightNumber) {
+		return flightDb.findByFlightNumber(flightNumber);
 	}
 
 	@Override

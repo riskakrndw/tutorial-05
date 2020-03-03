@@ -1,24 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>Home</title>
-		<head th:fragment="css">
-		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-		</head>
-		<head th:fragment="js">
-			<script th:src="@{/js/bootstrap.min.js}"></script>
-		</head>
-	</head>
-	<body>
-		<nav th:fragment="navbar" class="navbar navbar-dark bg-dark justify-content-start">
-			<a class="navbar-brand" th:text="${page}" href='#'></a>
-			
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{'/'}">Home</a>
-					</li>
-				</ul>
-			
+<html>
+    <head>
+        <title>Home</title>
+        <head th:fragment="css">
+            <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        </head>
+        <head th:fragment="js">
+            <script th:src="@{/js/bootstrap.min.js}"></script>
+        </head>
+    </head>
+    <body>
+        <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#" th:text="${navigation}"></a>
 		</nav>
-	</body>
+    </body>
 </html>

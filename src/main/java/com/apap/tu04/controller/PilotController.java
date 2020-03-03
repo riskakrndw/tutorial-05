@@ -23,15 +23,19 @@ public class PilotController {
 	private PilotService pilotService;
 	
 	@RequestMapping("/")
-	private String home(Model m) {
+	private String home(Model model) {
 		List<PilotModel> pilot = pilotService.getAllPilot();
-		m.addAttribute("pilot", pilot);
+		String navigation = "HOME";
+		model.addAttribute("navigation", navigation);
+		model.addAttribute("pilot", pilot);
 		return "home";
 	}
 	
 	@RequestMapping(value = "/pilot/add", method = RequestMethod.GET)
 	private String add(Model model) {
 		model.addAttribute("pilot", new PilotModel());
+		String navigation = "ADD PILOT";
+		model.addAttribute("navigation", navigation);
 		return "addPilot";
 	}
 	
@@ -39,18 +43,23 @@ public class PilotController {
 	private String addPilotSubmit(@ModelAttribute PilotModel pilot, Model model) {
 		pilotService.addPilot(pilot);
 		model.addAttribute("errMesssage", "Data Berhasil Ditambahkan");
+		String navigation = "NOTIF ADD PILOT";
+		model.addAttribute("navigation", navigation);
 		return "add";
 	}
 	
-	@RequestMapping("/pilot/view")
-	private String view(@RequestParam("licenseNumber") String licenseNumber, Model model) {
+	@RequestMapping(value = "/pilot/view", method = RequestMethod.GET)
+	public String viewPilot(@RequestParam("licenseNumber") String licenseNumber, Model model) {
 		PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
 		if(pilot==null) {
 			model.addAttribute("errMesssage", "Flight number tidak ditemukan");
+			String navigation = "NOTIF VIEW PILOT";
+			model.addAttribute("navigation", navigation);
 			return "errPage";
 		}else {
+			String navigation = "VIEW PILOT";
+			model.addAttribute("navigation", navigation);
 			model.addAttribute("pilot", pilot);
-			model.addAttribute("flight", pilot.getPilotFlight());
 			return "view-pilot";
 		}
 	}
@@ -60,9 +69,13 @@ public class PilotController {
 			try {
 			PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
 			pilotService.deletePilot(pilot);
+			String navigation = "DELETE PILOT";
+			model.addAttribute("navigation", navigation);
 			return "delete.html";	
 			} catch (Exception e) {
 				model.addAttribute("errMesssage", "Data Berhasil Dihapus");
+				String navigation = "NOTIF DELETE PILOT";
+				model.addAttribute("navigation", navigation);
 				return "errPage.html";
 			}	
 	}
@@ -71,12 +84,16 @@ public class PilotController {
 	public String updatePilot(@PathVariable(value = "licenseNumber") String licenseNumber, Model model) {
 		PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
 		model.addAttribute("pilot", pilot);
+		String navigation = "UPDATE PILOT";
+		model.addAttribute("navigation", navigation);
 		return "updatePilot.html";	
 	}
 	
 	@RequestMapping(value = "/pilot/update", method = RequestMethod.POST)
-	private String updatePilotSubmit(@ModelAttribute PilotModel pilot, Long id) {
+	private String updatePilotSubmit(@ModelAttribute PilotModel pilot, Long id, Model model) {
 		pilotService.addPilot(pilot);
+		String navigation = "NOTIF UPDATE PILOT";
+		model.addAttribute("navigation", navigation);
 		return "updateInfo.html";
 	}
 }
